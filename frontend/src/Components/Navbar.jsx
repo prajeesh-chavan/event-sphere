@@ -5,7 +5,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-sky-500/10 fixed w-full z-20 top-0 start-0">
+    <nav className="fixed w-full z-20 top-0 start-0">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="./event-logo.png" className="h-12" alt="Event Sphere Logo" />
@@ -18,7 +18,7 @@ const Navbar = () => {
             Sign Up
           </button> */}
 
-          <Button variant="danger">Sign In</Button>
+          <Button variant="destructive">Sign In</Button>
           <button
             onClick={() => setIsOpen(!isOpen)}
             type="button"
@@ -46,7 +46,7 @@ const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-white bg-sky-500 rounded md:bg-transparent md:text-sky-600 md:p-0"
+                className="block py-2 px-3 text-black bg-sky-500 rounded md:bg-transparent md:text-sky-600 md:p-0"
                 aria-current="page"
               >
                 Home
@@ -55,7 +55,7 @@ const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-500 md:p-0"
+                className="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-500 md:p-0"
               >
                 Browse Events
               </a>
@@ -63,7 +63,7 @@ const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-500 md:p-0"
+                className="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-500 md:p-0"
               >
                 Create Events
               </a>
@@ -71,7 +71,7 @@ const Navbar = () => {
             <li>
               <a
                 href="#"
-                className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-500 md:p-0"
+                className="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-500 md:p-0"
               >
                 About Us
               </a>
