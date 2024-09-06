@@ -1,4 +1,3 @@
-import { useState, createContext } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./Pages/Layout";
 import Home from "./Pages/Home";
@@ -7,9 +6,10 @@ import ContactUs from "./Pages/Contact-Us";
 import NotFound from "./Pages/NotFound";
 import EventLists from "./Pages/EventLists";
 import CreateEvent from "./Pages/CreateEvent";
-import AboutUs from "./Pages/AboutUS";
 import SignIn from "./Pages/SignIn";
 import Register from "./Pages/Register";
+import { ProtectedRoute } from "./Components/ProtectedRoute";
+import { UserProvider } from "./Components/UserContext"; // Use UserProvider
 
 function App() {
   const router = createBrowserRouter([
@@ -35,11 +35,11 @@ function App() {
         },
         {
           path: "create-event",
-          element: <CreateEvent />,
-        },
-        {
-          path: "about-us",
-          element: <AboutUs />,
+          element: (
+            <ProtectedRoute>
+              <CreateEvent />
+            </ProtectedRoute>
+          ),
         },
       ],
     },
@@ -57,7 +57,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <UserProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </UserProvider>
+  );
 }
 
 export default App;

@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { UserContext } from "./UserContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated } = useContext(UserContext);
+  const navigate = useNavigate(); // Move useNavigate here
+
+  const signOut = () => {
+    localStorage.removeItem("token");
+    navigate("/"); // Use navigate here
+    window.location.reload();
+  };
+
 
   return (
     <nav className="fixed w-full z-20 top-0 start-0 shadow-md bg-white">
@@ -16,9 +26,15 @@ const Navbar = () => {
           />
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <Link to='/sign-in'>
-            <Button variant="destructive">Sign In</Button>
-          </Link>
+          {isAuthenticated ? (
+            <Button variant="destructive" onClick={signOut}>
+              Sign Out
+            </Button>
+          ) : (
+            <Link to="/sign-in">
+              <Button variant="destructive">Sign In</Button>
+            </Link>
+          )}
           <button
             onClick={() => setIsOpen(!isOpen)}
             type="button"

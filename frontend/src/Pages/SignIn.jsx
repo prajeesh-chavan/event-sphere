@@ -30,6 +30,12 @@ const SignIn = () => {
       setLoading(false);
       setError("Invalid credentials");
     }
+
+    const response = await axios.post("http://localhost:5000/login", {
+      username,
+      password,
+    });
+    localStorage.setItem("token", response.data.token);
   };
 
   return (
