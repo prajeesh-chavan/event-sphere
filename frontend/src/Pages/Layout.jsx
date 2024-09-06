@@ -7,10 +7,10 @@ function Layout() {
   return (
     <div>
       <Navbar />
-      <div className="">
+      <div className="mt-24 min-h-screen flex flex-col justify-between">
         <Outlet />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

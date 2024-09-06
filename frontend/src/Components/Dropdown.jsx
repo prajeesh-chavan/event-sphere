@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -27,10 +26,13 @@ export function Combobox({ title, options }) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
+          variant={"danger"}
           role="combobox"
           aria-expanded={open}
-          className="w-96 justify-between"
+          className={cn(
+            "w-full justify-between border-2 rounded-none",
+            open ? "ring-2 ring-sky-300 ring-offset-2" : ""
+          )}
         >
           {value
             ? options.find((option) => option.value === value)?.label
