@@ -3,7 +3,7 @@ import { FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
 
 const AboutUs = () => {
   return (
-    <div className="max-w-screen-lg mx-auto py-10 px-4">
+    <div className="max-w-screen-lg mx-auto py-10 px-4 mt-24 h-full">
       <header className="text-center mb-10">
         <h1 className="text-4xl font-bold">About Me</h1>
         <p className="mt-4 text-lg">

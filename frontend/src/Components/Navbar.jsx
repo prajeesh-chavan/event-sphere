@@ -7,16 +7,23 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated } = useContext(UserContext);
   const navigate = useNavigate(); // Move useNavigate here
+  const [logIn, setLogIn] = useState(false);
 
   const signOut = () => {
     localStorage.removeItem("token");
     navigate("/"); // Use navigate here
+    setLogIn(false);
     window.location.reload();
   };
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setLogIn(true);
+    }
+  }, []);
 
   return (
-    <nav className="fixed w-full z-20 top-0 start-0 shadow-md bg-white">
+    <nav className="fixed w-full z-20 top-0 start-0">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
@@ -26,7 +33,7 @@ const Navbar = () => {
           />
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {isAuthenticated ? (
+          {logIn ? (
             <Button variant="destructive" onClick={signOut}>
               Sign Out
             </Button>

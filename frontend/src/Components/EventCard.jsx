@@ -1,9 +1,16 @@
 import React from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { CiCalendarDate } from "react-icons/ci";
+import BlurFade from "./magicui/blur-fade";
 
-const EventCard = ({ image, title, date, location, description, className }) => {
+const EventCard = ({ image, title, date, location, description, inView = true }) => {
   return (
+    // <BlurFade delay={.5} inView>
+    <div className={`transition-opacity duration-1000 transform ${
+      inView
+        ? "opacity-100 translate-y-0"
+        : "opacity-0 translate-y-96"
+    } `}>
     <div className={`bg-white  shadow-lg rounded-lg transform transition hover:scale-[1.02] duration-200 ease-in-out`}>
       <img
         src={image}
@@ -28,6 +35,8 @@ const EventCard = ({ image, title, date, location, description, className }) => 
       </button>
       </div>
     </div>
+    </div>
+    // </BlurFade>
   );
 };
 

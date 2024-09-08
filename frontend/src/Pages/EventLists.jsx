@@ -19,7 +19,7 @@ function EventLists() {
 
   return (
     <>
-      <div className="flex flex-col items-center p-12 gap-12">
+      <div className="flex flex-col items-center mt-24 p-12 gap-12">
         <SearchBar onSearch={searchEvents} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 ">

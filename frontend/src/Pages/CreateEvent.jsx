@@ -1,6 +1,6 @@
-import BlurFade from "@/Components/magicui/blur-fade";
-import { Input } from "@/Components/ui/input";
 import React, { useState } from "react";
+import axios from "axios";
+import { Input } from "@/Components/ui/input"; // Assuming you're using custom Input component
 
 const CreateEvent = () => {
   const [eventData, setEventData] = useState({
@@ -28,25 +28,38 @@ const CreateEvent = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle event creation logic here
-    console.log("Event Created:", eventData);
+    const formData = new FormData();
+    for (let key in eventData) {
+      formData.append(key, eventData[key]);
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/create-event",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      alert("Event created successfully");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <div className="max-w-screen-lg mx-auto py-10 px-4 w-1/2">
-      <h1 className="text-4xl font-bold text-center mb-8">
+      <h1 className="text-4xl font-bold text-center mb-8 my-24">
         Create a New Event
-      {/* <BlurFade delay={0.25} inView>
-      Create a New Event
-          </BlurFade> */}
       </h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label className="block text-lg font-medium">Event Title</label>
-
-          <Input
+          <input
             type="text"
             name="title"
             value={eventData.title}
@@ -67,7 +80,7 @@ const CreateEvent = () => {
             rows="5"
             placeholder="Enter event description"
             required
-          ></textarea>
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -97,7 +110,7 @@ const CreateEvent = () => {
 
         <div>
           <label className="block text-lg font-medium">Event Location</label>
-          <Input
+          <input
             type="text"
             name="location"
             value={eventData.location}
@@ -138,7 +151,7 @@ const CreateEvent = () => {
         <div>
           <button
             type="submit"
-            className="w-full bg-sky-500 text-white py-3 rounded-lg hover:bg-sky-600 transition duration-300"
+            className="w-full bg-sky-500 text-white font-bold py-3 rounded-lg hover:bg-sky-600 transition duration-300"
           >
             Create Event
           </button>
