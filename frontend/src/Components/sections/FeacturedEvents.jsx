@@ -1,14 +1,30 @@
 import { useInView } from "framer-motion";
 import EventCard from "../EventCard";
 import BlurFade from "../magicui/blur-fade";
-import { events } from "@/data";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { fetchEvents } from "@/api";
 
 export const FeaturedEvents = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.05, // Trigger when 10% of the section is visible
   });
+
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const getEvents = async () => {
+      try {
+        const data = await fetchEvents();
+        setEvents(data);
+        setFilteredEvents(data); // Update filteredEvents when events are fetched
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    getEvents();
+  }, []);
 
   return (
     <section className="flex flex-col items-center gap-10 justify-center h-screen">
@@ -22,15 +38,13 @@ export const FeaturedEvents = () => {
         {events.slice(0, 3).map((event, index) => (
           <EventCard
             key={index}
-            image={event.image}
+            image={`http://localhost:5000${event.imageUrl}`}
             title={event.title}
             date={event.date}
             location={event.location}
             description={event.description}
             className={`transition-opacity duration-1000 transform ${
-              inView
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-96"
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-96"
             } delay-${(index % 3) * 200}`}
           />
         ))}

@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.0.2",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-select": "^2.1.1",
@@ -23,6 +26,7 @@
     "cva": "^0.0.0",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.3.30",
+    "lottie-react": "^2.4.0",
     "lucide-react": "^0.435.0",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",

@@ -1,164 +1,105 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Input } from "@/Components/ui/input"; // Assuming you're using custom Input component
 
-const CreateEvent = () => {
-  const [eventData, setEventData] = useState({
-    title: "",
-    description: "",
-    date: "",
-    time: "",
-    location: "",
-    category: "",
-    image: null,
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEventData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+function App() {
+  const [eventName, setEventName] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [location, setLocation] = useState("");
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState("");
 
   const handleImageChange = (e) => {
-    setEventData((prevData) => ({
-      ...prevData,
-      image: e.target.files[0],
-    }));
+    const file = e.target.files[0];
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    for (let key in eventData) {
-      formData.append(key, eventData[key]);
-    }
+    formData.append("eventName", eventName);
+    formData.append("description", description);
+    formData.append("date", date);
+    formData.append("time", time);
+    formData.append("location", location);
+    formData.append("image", image);
 
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/create-event",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      alert("Event created successfully");
-    } catch (err) {
-      console.error(err);
-    }
+    await axios.post("http://localhost:5000/create-event", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    alert("Event saved successfully!");
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto py-10 px-4 w-1/2">
-      <h1 className="text-4xl font-bold text-center mb-8 my-24">
-        Create a New Event
-      </h1>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label className="block text-lg font-medium">Event Title</label>
-          <input
-            type="text"
-            name="title"
-            value={eventData.title}
-            onChange={handleChange}
-            className="w-full mt-2 p-3 border rounded-lg"
-            placeholder="Enter event title"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-lg font-medium">Event Description</label>
-          <textarea
-            name="description"
-            value={eventData.description}
-            onChange={handleChange}
-            className="w-full mt-2 p-3 border rounded-lg"
-            rows="5"
-            placeholder="Enter event description"
-            required
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-lg font-medium">Event Date</label>
-            <input
-              type="date"
-              name="date"
-              value={eventData.date}
-              onChange={handleChange}
-              className="w-full mt-2 p-3 border rounded-lg"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-lg font-medium">Event Time</label>
-            <input
-              type="time"
-              name="time"
-              value={eventData.time}
-              onChange={handleChange}
-              className="w-full mt-2 p-3 border rounded-lg"
-              required
-            />
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-lg font-medium">Event Location</label>
-          <input
-            type="text"
-            name="location"
-            value={eventData.location}
-            onChange={handleChange}
-            className="w-full mt-2 p-3 border rounded-lg"
-            placeholder="Enter event location"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-lg font-medium">Event Category</label>
-          <select
-            name="category"
-            value={eventData.category}
-            onChange={handleChange}
-            className="w-full mt-2 p-3 border rounded-lg"
-            required
-          >
-            <option value="">Select category</option>
-            <option value="Music">Music</option>
-            <option value="Technology">Technology</option>
-            <option value="Art">Art</option>
-            <option value="Sports">Sports</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-lg font-medium">Event Image</label>
+    <div className="flex justify-center items-center min-h-screen p-24">
+      <div className="max-w-xl mx-auto mt-24 p-12 bg-white rounded-lg border-2 shadow-md">
+        <h1 className="text-2xl font-bold mb-6 text-center">Create Event</h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="file"
-            name="image"
+            accept="image/*"
             onChange={handleImageChange}
-            className="w-full mt-2 p-3 border rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
           />
-        </div>
+          {preview && (
+            <img
+              src={preview}
+              alt="Event Preview"
+              className="w-full h-64 object-cover mt-4 rounded-md"
+            />
+          )}
+          <input
+            type="text"
+            placeholder="Event Name"
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+          />
+          <div className="flex gap-4">
+            <input
+              type="date"
+              placeholder="Date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="w-1/2 px-4 py-2 border border-gray-300 rounded-md"
+            />
+            <input
+              type="time"
+              placeholder="Time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              className="w-1/2 px-4 py-2 border border-gray-300 rounded-md"
+            />
+          </div>
+          <input
+            type="text"
+            placeholder="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+          />
 
-        <div>
           <button
             type="submit"
-            className="w-full bg-sky-500 text-white font-bold py-3 rounded-lg hover:bg-sky-600 transition duration-300"
+            className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
           >
-            Create Event
+            Save
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
-};
+}
 
-export default CreateEvent;
+export default App;

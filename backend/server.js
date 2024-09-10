@@ -2,19 +2,19 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const multer = require("multer");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("./models/User");
 const Event = require("./models/Event");
+
+const multer = require("multer");
+const path = require("path");
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-
-const upload = multer({ dest: "uploads/" });
 
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -71,28 +71,70 @@ app.post("/login", async (req, res) => {
 });
 
 // Event Creation Route
-app.post(
-  "/create-event",
-  verifyToken,
-  upload.single("image"),
-  async (req, res) => {
-    const { title, description, date, time, location, category } = req.body;
-    const imagePath = req.file.path;
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// Set storage engine
+const storage = multer.diskStorage({
+  destination: "./uploads/",
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
 
-    const event = new Event({
-      title,
+// Initialize upload
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000 }, // Limit file size to 1MB
+  fileFilter: (req, file, cb) => {
+    checkFileType(file, cb);
+  },
+}).single("image");
+
+// Check file type
+function checkFileType(file, cb) {
+  const filetypes = /jpeg|jpg|png|gif/;
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb("Error: Images Only!");
+  }
+}
+
+app.post("/create-event", (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).json({ message: err });
+    }
+
+    const { eventName, description, date, time, location } = req.body;
+    const newEvent = new Event({
+      eventName,
       description,
       date,
       time,
       location,
-      category,
-      image: imagePath,
+      imageUrl: req.file ? `/uploads/${req.file.filename}` : "", // Save image URL
     });
 
-    await event.save();
-    res.send("Event created");
+    await newEvent.save();
+    res.json(newEvent);
+  });
+});
+
+// Get Events
+app.get("/events", async (req, res) => {
+  try {
+    const events = await Event.find();
+    res.json(events);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-);
+});
 
 // Start the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -4,6 +4,8 @@ import { useInView } from "react-intersection-observer";
 import { Hero } from "@/Components/sections/Hero";
 import { BrowseEvents } from "@/Components/sections/BrowseEvents";
 import { FeaturedEvents } from "@/Components/sections/FeacturedEvents";
+import Lottie from "lottie-react";
+import heart from "../../public/heart.json";
 
 const Home = () => {
   const { ref, inView } = useInView({
@@ -123,7 +125,7 @@ const Home = () => {
         <Hero />
         <BrowseEvents />
         <FeaturedEvents />
-        <Testimonials />
+        {/* <Testimonials /> */}
       </div>
     </>
   );

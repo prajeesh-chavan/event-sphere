@@ -75,7 +75,7 @@ function Footer() {
               </svg>
             </a>
           </div>
-          <span className="text-lg text-gray-100 text-center block">
+          <span className="text-sm md:text-md lg:text-lg text-gray-100 text-center block">
             ©<a href="">eventsphere</a> {date}, All rights reserved.
           </span>
         </div>
