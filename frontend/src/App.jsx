@@ -25,6 +25,7 @@ import Dashboard from "./Pages/Dashboard";
 import BookingPage from "./Pages/BookingPage";
 import { Toaster } from "react-hot-toast";
 import UpdateEventForm from "./Components/Events/updateEvent";
+import BookingVerify from "./Pages/BookingVerify";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="login" element={<LogIn />} />
           <Route path="register" element={<Register />} />
           <Route path="bookings/:eventId" element={<BookingPage />} />
+          <Route path="verify/:id" element={<BookingVerify />} />
 
           {/* Admin Protected Routes */}
           <Route
@@ -81,7 +83,10 @@ function App() {
             <Route path="create-event" element={<CreateEvent />} />
             <Route path="tickets" element={<TicketList />} />
             <Route path="events" element={<EventManagement />} />
-            <Route path="event-details/:eventId" element={<UpdateEventForm />} />
+            <Route
+              path="event-details/:eventId"
+              element={<UpdateEventForm />}
+            />
           </Route>
 
           {/* User Protected Routes */}

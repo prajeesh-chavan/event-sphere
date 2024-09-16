@@ -22,11 +22,11 @@ function Dashboard() {
 
   if (role === "user") {
     navLinks.push(
-      {
-        icon: <RiDashboardLine size={28} />,
-        label: "Dashboard",
-        path: "dashboard",
-      },
+      // {
+      //   icon: <RiDashboardLine size={28} />,
+      //   label: "Dashboard",
+      //   path: "dashboard",
+      // },
       {
         icon: <CgProfile size={28} />,
         label: "Profile",

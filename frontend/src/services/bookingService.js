@@ -32,7 +32,14 @@ export const cancelBooking = async (bookingId) => {
   return response.data;
 };
 
-export const getBookings = async (eventId) => {
+export const getEventBookings = async (eventId) => {
   const response = await axios.get(`${API_URL}event/${eventId}`);
+  console.log(response.data);
+  return response.data;
+};
+
+export const verifyBooking = async (bookingId) => {
+  const response = await axios.get(`${API_URL}verify/${bookingId}`);
+  
   return response.data;
 };

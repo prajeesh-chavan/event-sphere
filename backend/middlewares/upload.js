@@ -1,11 +1,11 @@
-const multer = require('multer');
-const path = require('path');
+const multer = require("multer");
+const path = require("path");
 
 // Configure multer for file storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     // Set the destination folder for uploads (ensure this folder exists)
-    cb(null, 'uploads/profile');
+    cb(null, "uploads");
   },
   filename: function (req, file, cb) {
     // Define how the file name should be saved (e.g., unique timestamp with original extension)
@@ -22,7 +22,7 @@ const fileFilter = (req, file, cb) => {
   if (extname && mimetype) {
     return cb(null, true);
   } else {
-    cb(new Error('Only images are allowed (jpeg, jpg, png)'));
+    cb(new Error("Only images are allowed (jpeg, jpg, png)"));
   }
 };
 

@@ -16,6 +16,7 @@ exports.createBooking = async (req, res) => {
       numberOfTickets,
       totalAmount,
       eventTitle: event.title,
+      eventDate: event.date,
     });
 
     await booking.save();
@@ -65,5 +66,18 @@ exports.getBookings = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error fetching event bookings", error: err.message });
+  }
+};
+
+exports.verifyBooking = async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.bookingId);
+    if (!booking) return res.status(404).json({ message: "Booking not found" });
+
+    res.json({ message: "Booking verified successfully", booking });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Error verifying booking", error: err.message });
   }
 };

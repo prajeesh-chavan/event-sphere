@@ -4,7 +4,7 @@ import { CiCalendarDate } from "react-icons/ci";
 import { FiEdit2 } from "react-icons/fi";
 
 const EventCard = ({
-  image = "/image.png",
+  image,
   title,
   date,
   location,

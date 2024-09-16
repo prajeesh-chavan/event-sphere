@@ -1,30 +1,43 @@
+// src/Components/UpdateEventForm.js
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; // Assuming you're using react-router-dom
-import { getEventById, updateEvent } from "@/services/eventService"; // Import event service
+import { useParams } from "react-router-dom";
+import { getEventById, updateEvent } from "../../services/eventService";
 import toast from "react-hot-toast";
-import Ticket from "../TicketList";
-import { getBookings } from "@/services/bookingService";
 
-function UpdateEventForm() {
+const UpdateEventForm = () => {
   const { eventId } = useParams(); // Get the event ID from the route
+  const userId = localStorage.getItem("userId");
   const [eventData, setEventData] = useState({
     title: "",
     date: "",
+    time: "",
     location: "",
     description: "",
-    ticketsAvailable: 0,
+    schedule: [],
+    organizer: {
+      name: "",
+      email: "",
+      phone: "",
+    },
+    eventOrganizerId: userId,
+    image: null, // For the new image file
   });
   const [loading, setLoading] = useState(true);
+  const [existingImage, setExistingImage] = useState(null); // Store existing image URL
   const [error, setError] = useState("");
-  const [isEditable, setIsEditable] = useState(false); // Toggle to switch between view and edit modes
-  const [tickets, setTickets] = useState([]);
+  const [editMode, setEditMode] = useState(false); // State to toggle between view and edit modes
 
   useEffect(() => {
-    // Fetch event data using eventService when the component loads
+    // Fetch the existing event data
     const fetchEvent = async () => {
       try {
         const data = await getEventById(eventId);
-        setEventData(data);
+        setEventData({
+          ...data,
+          eventOrganizerId: userId, // Ensure the organizer ID is set
+          image: null, // Reset image in case user wants to upload a new one
+        });
+        setExistingImage(data.image); // Assuming 'image' is the URL of the existing image
         setLoading(false);
       } catch (err) {
         setError("Error fetching event data");
@@ -33,135 +46,275 @@ function UpdateEventForm() {
     };
 
     fetchEvent();
-  }, [eventId]);
+  }, [eventId, userId]);
 
-  useEffect(() => {
-    const fetchTickets = async () => {
-      const data = await getBookings(eventId);
-      setTickets(data);
-      setLoading(false);
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-    fetchTickets();
-  }, [eventId]);
+    if (name.includes("organizer")) {
+      const [_, key] = name.split(".");
+      setEventData({
+        ...eventData,
+        organizer: {
+          ...eventData.organizer,
+          [key]: value,
+        },
+      });
+    } else if (name === "image") {
+      // Handle image file change
+      setEventData({
+        ...eventData,
+        image: e.target.files[0], // Store the new image file
+      });
+    } else {
+      setEventData({ ...eventData, [name]: value });
+    }
+  };
+
+  const handleScheduleChange = (index, value) => {
+    const newSchedule = [...eventData.schedule];
+    newSchedule[index] = value;
+    setEventData({ ...eventData, schedule: newSchedule });
+  };
+
+  const addScheduleItem = () => {
+    setEventData({ ...eventData, schedule: [...eventData.schedule, ""] });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateEvent(eventId, eventData);
+      // Create FormData object to handle file upload
+      const formData = new FormData();
+      for (const key in eventData) {
+        if (eventData.hasOwnProperty(key)) {
+          if (key === "organizer") {
+            for (const subKey in eventData.organizer) {
+              formData.append(
+                `organizer.${subKey}`,
+                eventData.organizer[subKey]
+              );
+            }
+          } else if (key === "schedule") {
+            // Append schedule items individually
+            eventData.schedule.forEach((item, index) => {
+              formData.append(`schedule[${index}]`, item);
+            });
+          } else if (key === "image") {
+            if (eventData.image) {
+              // If a new image was selected, append it
+              formData.append("image", eventData.image);
+            }
+            // If no new image was selected, the existing image remains
+          } else {
+            formData.append(key, eventData[key]);
+          }
+        }
+      }
+
+      const response = await updateEvent(eventId, formData); // Adjust service to handle FormData
       toast.success("Event updated successfully");
-      setIsEditable(false); // Disable edit mode after successful update
-    } catch (err) {
-      console.error("Error updating event", err);
+      console.log("Event updated:", response);
+      setEditMode(false); // Switch to view mode after update
+    } catch (error) {
+      console.error(
+        "Error updating event:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
-  const toggleEdit = () => {
-    setIsEditable(!isEditable); // Toggle between editable and read-only
-  };
-
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="text-center mt-20">Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="container p-6">
       <div className="flex justify-between">
-        <h1 className="text-4xl font-bold mb-6 text-gray-700">Event Details</h1>
+        <h1 className="text-4xl font-bold mb-6 text-gray-700">
+          {editMode ? "Update Event" : "Event Details"}
+        </h1>
         <button
-          className="mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          onClick={toggleEdit}
+          onClick={() => setEditMode(!editMode)}
+          className="bg-blue-500 h-12 text-white px-4 py-2 rounded"
         >
-          {isEditable ? "Cancel Edit" : "Edit Event"}
+          {editMode ? "Cancel" : "Edit Event"}
         </button>
       </div>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded-lg p-6 space-y-6"
-      >
-        <div>
-          <label className="block text-gray-600">Event Title</label>
+
+      <form onSubmit={handleSubmit}>
+        {/* Event Image */}
+        {/* Event Image */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Event Image</label>
+          {existingImage && !eventData.image && (
+            <div className="mb-2">
+              <img
+                src={`http://localhost:5000${existingImage}`}
+                alt="Event"
+                className="w-64 h-40 object-cover"
+              />
+            </div>
+          )}
+          {editMode&&(<input
+            type="file"
+            name="image"
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
+          />)}
+          {eventData.image && (
+            <div className="mt-2 text-sm text-green-600">
+              Selected file: {eventData.image.name}
+            </div>
+          )}
+        </div>
+
+
+        {/* Event Title */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Event Title</label>
           <input
             type="text"
-            className="mt-1 w-full p-2 border rounded"
+            name="title"
             value={eventData.title}
-            onChange={(e) =>
-              setEventData({ ...eventData, title: e.target.value })
-            }
-            disabled={!isEditable} // Disable input if not editable
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
+            required
+            disabled={!editMode}
           />
         </div>
 
-        <div>
-          <label className="block text-gray-600">Date</label>
+        {/* Date */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Date</label>
           <input
             type="date"
-            className="mt-1 w-full p-2 border rounded"
+            name="date"
             value={eventData.date}
-            onChange={(e) =>
-              setEventData({ ...eventData, date: e.target.value })
-            }
-            disabled={!isEditable} // Disable input if not editable
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
+            required
+            disabled={!editMode}
           />
         </div>
 
-        <div>
-          <label className="block text-gray-600">Location</label>
+        {/* Time */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Time</label>
           <input
             type="text"
-            className="mt-1 w-full p-2 border rounded"
-            value={eventData.location}
-            onChange={(e) =>
-              setEventData({ ...eventData, location: e.target.value })
-            }
-            disabled={!isEditable} // Disable input if not editable
+            name="time"
+            value={eventData.time}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
+            required
+            disabled={!editMode}
           />
         </div>
 
-        <div>
-          <label className="block text-gray-600">Description</label>
-          <textarea
-            className="mt-1 w-full p-2 border rounded"
-            value={eventData.description}
-            onChange={(e) =>
-              setEventData({ ...eventData, description: e.target.value })
-            }
-            disabled={!isEditable} // Disable input if not editable
-          ></textarea>
-        </div>
-
-        <div>
-          <label className="block text-gray-600">Tickets Available</label>
+        {/* Location */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Location</label>
           <input
-            type="number"
-            className="mt-1 w-full p-2 border rounded"
-            value={eventData.ticketsAvailable}
-            onChange={(e) =>
-              setEventData({
-                ...eventData,
-                ticketsAvailable: e.target.value,
-              })
-            }
-            disabled={!isEditable} // Disable input if not editable
+            type="text"
+            name="location"
+            value={eventData.location}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
+            required
+            disabled={!editMode}
           />
         </div>
 
-        {isEditable && (
+        {/* Description */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Description</label>
+          <textarea
+            name="description"
+            value={eventData.description}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
+            required
+            disabled={!editMode}
+          />
+        </div>
+
+        {/* Schedule */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Schedule</label>
+          {eventData.schedule.map((item, index) => (
+            <input
+              key={index}
+              type="text"
+              value={item}
+              onChange={(e) => handleScheduleChange(index, e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded mt-2"
+              required
+              disabled={!editMode}
+            />
+          ))}
+          {editMode && (
+            <button
+              type="button"
+              onClick={addScheduleItem}
+              className="mt-2 bg-blue-500 text-white px-4 py-2 rounded"
+              disabled={!editMode}
+            >
+              Add Schedule Item
+            </button>
+          )}
+        </div>
+
+        {/* Organizer Details */}
+        <div className="mb-4">
+          <label className="block text-gray-700">Organizer Name</label>
+          <input
+            type="text"
+            name="organizer.name"
+            value={eventData.organizer.name}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
+            required
+            disabled={!editMode}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700">Organizer Email</label>
+          <input
+            type="email"
+            name="organizer.email"
+            value={eventData.organizer.email}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
+            required
+            disabled={!editMode}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700">Organizer Phone</label>
+          <input
+            type="text"
+            name="organizer.phone"
+            value={eventData.organizer.phone}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
+            required
+            disabled={!editMode}
+          />
+        </div>
+
+        {editMode && (
           <button
             type="submit"
-            className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
+            className="bg-blue-500 text-white px-4 py-2 rounded"
           >
             Update Event
           </button>
         )}
       </form>
-      {!isEditable&&(<div className="mt-12">
-        <h1 className="text-4xl font-bold mb-6 text-gray-700">Tickets</h1>
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <Ticket tickets={tickets} />
-        </div>
-      </div>)}
     </div>
   );
-}
+};
 
 export default UpdateEventForm;

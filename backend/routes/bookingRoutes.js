@@ -5,6 +5,7 @@ const {
   getUserBookings,
   cancelBooking,
   getBookings,
+  verifyBooking,
 } = require("../controllers/bookingController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
@@ -14,5 +15,6 @@ router.post("/book", createBooking);
 router.get("/my-bookings", authMiddleware, getUserBookings);
 router.put("/cancel/:bookingId", cancelBooking);
 router.get("/event/:eventId", getBookings);
+router.get("/verify/:bookingId", verifyBooking);
 
 module.exports = router;

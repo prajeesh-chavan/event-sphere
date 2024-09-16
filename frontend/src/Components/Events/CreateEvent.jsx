@@ -18,6 +18,7 @@ const CreateEvent = () => {
       phone: "",
     },
     eventOrganizerId: userId,
+    image: null, // New field for image
   });
 
   const handleChange = (e) => {
@@ -25,12 +26,19 @@ const CreateEvent = () => {
 
     if (name.includes("organizer")) {
       const [_, key] = name.split(".");
+
       setEventData({
         ...eventData,
         organizer: {
           ...eventData.organizer,
           [key]: value,
         },
+      });
+    } else if (name === "image") {
+      // Handle image file change
+      setEventData({
+        ...eventData,
+        image: e.target.files[0], // Store the file object
       });
     } else {
       setEventData({ ...eventData, [name]: value });
@@ -50,7 +58,24 @@ const CreateEvent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await createEvent(eventData);
+      // Create FormData object to handle file upload
+      const formData = new FormData();
+      for (const key in eventData) {
+        if (eventData.hasOwnProperty(key)) {
+          if (key === "organizer") {
+            for (const subKey in eventData.organizer) {
+              formData.append(
+                `organizer.${subKey}`,
+                eventData.organizer[subKey]
+              );
+            }
+          } else {
+            formData.append(key, eventData[key]);
+          }
+        }
+      }
+
+      const response = await createEvent(formData); // Adjust service to handle FormData
       toast.success("Event created successfully");
       console.log("Event created:", response);
       // Reset form to initial state
@@ -67,6 +92,7 @@ const CreateEvent = () => {
           phone: "",
         },
         eventOrganizerId: userId,
+        image: null,
       });
     } catch (error) {
       console.error(
@@ -77,9 +103,11 @@ const CreateEvent = () => {
   };
 
   return (
-    <div className="container p-6 ">
-      <h1 className="text-4xl font-bold mb-6 text-gray-700">Create New Event</h1>
-      
+    <div className="container p-6">
+      <h1 className="text-4xl font-bold mb-6 text-gray-700">
+        Create New Event
+      </h1>
+
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700">Event Title</label>
@@ -186,6 +214,15 @@ const CreateEvent = () => {
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded mt-2"
             required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">Event Image</label>
+          <input
+            type="file"
+            name="image"
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
           />
         </div>
         <button

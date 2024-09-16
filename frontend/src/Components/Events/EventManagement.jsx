@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import EventCard from "../EventCard";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { FiEdit2 } from "react-icons/fi";
-import Ticket from "../TicketList";
-import { getBookings } from "@/services/bookingService";
+
 
 const EventManagement = () => {
   const [events, setEvents] = useState([]);
@@ -27,8 +25,6 @@ const EventManagement = () => {
 
     fetchEvents();
   }, []);
-
-  
 
   return (
     <>
@@ -61,6 +57,7 @@ const EventManagement = () => {
                   <Link to={`/organizer/event-details/${event._id}`}>
                     <EventCard
                       key={index}
+                      image={`http://localhost:5000${event.image}`}
                       title={event.title}
                       date={event.date}
                       location={event.location}
@@ -73,7 +70,6 @@ const EventManagement = () => {
           )}
         </div>
       )}
-      
     </>
   );
 };

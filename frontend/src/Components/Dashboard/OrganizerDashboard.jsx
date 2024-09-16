@@ -90,7 +90,7 @@ function Dashboard() {
               <Link to={`/organizer/event-details/${event._id}`}>
                 <EventCard
                   key={index}
-                  // image={`http://localhost:5000${event.imageUrl}`}
+                  image={`http://localhost:5000${event.image}`}
                   title={event.title}
                   date={event.date}
                   location={event.location}

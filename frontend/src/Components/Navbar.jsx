@@ -15,7 +15,7 @@ const Navbar = () => {
     const role = localStorage.getItem("userRole");
     const name = localStorage.getItem("userName");
     setUserRole(role);
-    setUserName(name || "John Doe");
+    setUserName(name);
   }, []);
 
   const [user, setUser] = useState({});
@@ -36,7 +36,7 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userRole");
     toast.success("Logged out successfully");
-    navigate("/");
+    window.location.reload();
   };
 
   const dashboardLink = () => {
@@ -44,7 +44,7 @@ const Navbar = () => {
       case "admin":
         return "/dashboard";
       case "user":
-        return "/user/dashboard";
+        return "/user/profile";
       case "organizer":
         return "/organizer/dashboard";
       default:

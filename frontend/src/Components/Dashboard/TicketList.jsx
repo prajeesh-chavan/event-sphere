@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { getUserBookings } from "@/services/bookingService";
+import Barcode from "react-barcode";
+import QRCode from "react-qr-code";
 
 function TicketList() {
   const [tickets, setTickets] = useState([]);
@@ -104,39 +106,55 @@ function TicketList() {
           className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center"
           onClick={closeModal}
         >
-          <div className="relative p-8 md:p-12 max-w-lg w-full bg-white rounded-lg shadow-lg">
-            <div
-              className="ticket-container p-6"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="ticket-header flex flex-col md:flex-row justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-gray-800 flex items-center">
-                  <span className="mr-2">
-                    {getCategoryIcon(selectedTicket.eventTitle)}
-                  </span>
-                  {selectedTicket.eventTitle}
-                </h2>
-                <div className="ticket-date text-sm text-gray-400">
+          <div
+            className="relative p-8 md:p-12 max-w-xl w-full bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-2xl "
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="ticket-container p-6 border border-gray-200 rounded-lg gap-12 flex">
+              <div className="">
+                <div className="ticket-header flex flex-col md:flex-row justify-between items-center mb-6">
+                  <h2 className="text-3xl font-extrabold text-gray-800 flex items-center">
+                    {selectedTicket.eventTitle}
+                  </h2>
+                </div>
+                <div className="ticket-date text-sm text-gray-500">
                   {new Date(selectedTicket.bookedAt).toLocaleDateString()}
                 </div>
+
+                <div className="ticket-details flex justify-between mb-4">
+                  <div>
+                    <p className="text-gray-700">
+                      Seat:
+                      <span className="ml-1 font-semibold text-lg text-gray-900">
+                        {selectedTicket.seatNumber}
+                      </span>
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-end text-right">
+                    <p className="text-gray-700">
+                      Price:
+                      <span className="ml-1 font-semibold text-lg text-gray-900">
+                        ₹{selectedTicket.price || "N/A"}
+                      </span>
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className=" mb-4">
-                <p className="text-gray-600">
-                  Seat:{" "}
-                  <span className="font-semibold">
-                    {selectedTicket.seatNumber}
-                  </span>
-                </p>
+              <div className="ticket-qr text-center">
+                <QRCode
+                  size={150}
+                  value={`http://localhost:5173/${selectedTicket._id}`}
+                  className="border-2 border-gray-200 p-2 rounded-md"
+                />
               </div>
             </div>
-            <div className="absolute top-5 right-5">
-              <button
-                className="text-red-500 hover:text-red-700"
-                onClick={closeModal}
-              >
-                <AiOutlineClose size={24} />
-              </button>
-            </div>
+
+            <button
+              className="absolute top-5 right-5 text-red-500 hover:text-red-700 transition-colors duration-300"
+              onClick={closeModal}
+            >
+              <AiOutlineClose size={24} />
+            </button>
           </div>
         </div>
       )}

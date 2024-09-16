@@ -8,18 +8,6 @@ import heroImage from "../../../public/event-animation";
 import BlurFade from "../magicui/blur-fade";
 
 export const Hero = () => {
-  const lottieRef = useRef(null);
-
-  useEffect(() => {
-    lottieRef.current?.play();
-    const timer = setTimeout(() => {
-      // Start the animation after 3 seconds (or any other logic)
-      lottieRef.current?.pause();
-    }, 1500); // Adjust the delay time (3000ms = 3 seconds)
-
-    // Optional: Clear timeout if component unmounts
-    return () => clearTimeout(timer);
-  }, []);
   return (
     <section className="flex flex-col h-[95vh] pt-12 items-center justify-center  bg-gradient-to-b from-sky-100/60 to-transparent">
       <div className="flex items-center justify-between flex-col md:flex-row w-[320px] sm:w-auto">
@@ -52,8 +40,7 @@ export const Hero = () => {
         <Lottie
           animationData={heroImage}
           className="w-2/3 md:w-2/3 md:-me-28"
-          autoplay={false} // Disable autoplay
-          lottieRef={lottieRef} // Assign the ref to Lottie
+          loop={false}
         />
       </div>
     </section>

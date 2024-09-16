@@ -115,7 +115,7 @@ export const BookingForm = ({ eventId, setIsModalOpen }) => {
         </div>
         <div className="flex-col mt-8 gap-10">
           <div className="text-gray-700 text-sm font-bold mb-2">
-            Total Amount: ${numberOfTickets * 10}
+            Total Amount: ₹{numberOfTickets * 10}
           </div>
           <button
             type="submit"

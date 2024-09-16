@@ -13,6 +13,7 @@ const bookingSchema = new mongoose.Schema({
   },
   paymentDetails: { type: Object },
   bookedAt: { type: Date, default: Date.now },
+  eventDate: { type: Date, required: true },
   eventTitle: { type: String },
 });
 
