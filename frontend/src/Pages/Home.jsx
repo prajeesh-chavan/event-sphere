@@ -6,6 +6,14 @@ import { BrowseEvents } from "@/Components/sections/BrowseEvents";
 import { FeaturedEvents } from "@/Components/sections/FeacturedEvents";
 import Lottie from "lottie-react";
 import heart from "../../public/heart.json";
+import {
+  FaUserPlus,
+  FaSearch,
+  FaTicketAlt,
+  FaSmile,
+  FaStar,
+  FaLock,
+} from "react-icons/fa";
 
 const Home = () => {
   const { ref, inView } = useInView({
@@ -14,118 +22,85 @@ const Home = () => {
   });
 
   return (
-    //     <>
-    //       {/* Hero Section */}
-    //       <section className="mt-20 py-16 sm:py-24 lg:py-30 flex items-center justify-center relative">
-    //   <img
-    //     src="/tick.svg"
-    //     className="hidden md:block absolute top-5  w-4/5 sm:w-3/4  -z-50 animate-fadeInLeft"
-    //   />
-    //   <div className="mx-auto sm:ms-20 md:ms-[480px] w-1/2 text-center flex flex-col items-center">
-    //     <h1>
-    //       <WordPullUp
-    //         words="Seamless Event Booking Starts Here"
-    //         className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none drop-shadow-md text-black"
-    //         highlightIndices={[1, 2]}
-    //         highlightColors={["text-sky-500"]}
-    //       />
-    //     </h1>
-    //     <p>
-    //       <FadeText
-    //         className="text-base sm:text-lg md:text-xl mb-8 font-normal text-slate-600 sm:px-8 md:px-12 lg:px-20 xl:px-24"
-    //         direction="left"
-    //         framerProps={{
-    //           show: { transition: { delay: 1 } },
-    //         }}
-    //         text="EventSphere simplifies event booking, offering real-time availability, ticket management, and secure payments, all in one place."
-    //       />
-    //     </p>
-
-    //     <Link to="search-event" spy={true} smooth={true} duration={500}>
-    //       <Button variant="primary" className="shadow-md opacity-0 delay-500 animate-fadeInUp">
-    //         Browse Events
-    //       </Button>
-    //     </Link>
-    //   </div>
-    // </section>
-
-    //       {/* Search Bar */}
-
-    //       <section
-    //         id="search-event"
-    //         className="relative h-50  gap-12  flex flex-col items-center justify-center"
-    //       >
-    //         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl pt-28 font-bold text-center ">
-    //           <BlurFade delay={0.25} inView>
-    //             Engage Your Curiosity
-    //           </BlurFade>
-    //           <BlurFade delay={0.25 * 2} inView>
-    //             Discover Events Near You!
-    //           </BlurFade>
-    //         </h1>
-
-    //         <SearchBar />
-    //         <img
-    //           src="/undraw_undraw_undraw_undraw_undraw_undraw_undraw_undraw_undraw_search_engines_041x_-2-_cl95_o7o8_pigd_-1-_wbm3_t5p8_-1-_mt5l_-2-_dhxr_-2-_nmxe.svg"
-    //           className="w-4/5 md:w-2/6"
-    //         />
-
-    //         {/* <Globe className="top-[500px]"/> */}
-    //       </section>
-
-    //       {/* Featured Events */}
-    //       <section className="py-56 m-12 sm:m-0 flex flex-col items-center gap-32">
-    //         <h1 ref={ref} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center">
-    //           <BlurFade delay={0.25} inView>
-    //             Exclusive Events
-    //           </BlurFade>
-    //         </h1>
-
-    //         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    //           {events.slice(0, 3).map((event, index) => (
-    //             <EventCard
-    //               key={index}
-    //               image={event.image}
-    //               title={event.title}
-    //               date={event.date}
-    //               location={event.location}
-    //               description={event.description}
-    //               className={`transition-opacity duration-1000 transform ${
-    //                 inView
-    //                   ? "opacity-100 translate-y-0"
-    //                   : "opacity-0 translate-y-96"
-    //               } delay-${(index % 3) * 200}`}
-    //             />
-    //           ))}
-    //         </div>
-    //       </section>
-
-    //       {/* Categories */}
-    //       {/* <section className="h-screen p-24">
-    //       <h1 className="text-5xl uppercase text-center ">
-    //           <BlurFade delay={0.25} inView>
-    //             Category
-    //           </BlurFade>
-    //         </h1>
-    //         <div className="h-24 w-64"></div>
-    //       </section> */}
-    //       <CategorySection />
-
-    //       {/* Testimonials */}
-    //       <section className="md:py-24">
-    //         <Testimonials />
-    //       </section>
-
-    //       {/*  */}
-    //     </>
-
     <>
-      {/* <div className="bg-gradient-to-l from-sky-100/80 via-transparent to-sky-100/80 w-full h-screen absolute"></div> */}
       <div className="bg-gradient-to-l from-sky-100/80 via-white to-sky-100/80">
         <Hero />
         <BrowseEvents />
         <FeaturedEvents />
         {/* <Testimonials /> */}
+        <section className="py-12" ref={ref}>
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-8">
+              How It Works
+            </h2>
+            <div
+              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ${
+                inView ? "animate-fadeIn" : ""
+              }`}
+            >
+              <div className="text-center hover:scale-105 transform transition-transform">
+                <FaUserPlus className="mx-auto mb-4 text-4xl text-blue-500" />
+                <h3 className="text-xl font-semibold mb-2">Step 1</h3>
+                <p className="text-gray-600">
+                  Sign up and create your profile.
+                </p>
+              </div>
+              <div className="text-center hover:scale-105 transform transition-transform">
+                <FaSearch className="mx-auto mb-4 text-4xl text-blue-500" />
+                <h3 className="text-xl font-semibold mb-2">Step 2</h3>
+                <p className="text-gray-600">
+                  Browse and find events that interest you.
+                </p>
+              </div>
+              <div className="text-center hover:scale-105 transform transition-transform">
+                <FaTicketAlt className="mx-auto mb-4 text-4xl text-blue-500" />
+                <h3 className="text-xl font-semibold mb-2">Step 3</h3>
+                <p className="text-gray-600">
+                  Register for events and get your tickets.
+                </p>
+              </div>
+              <div className="text-center hover:scale-105 transform transition-transform">
+                <FaSmile className="mx-auto mb-4 text-4xl text-blue-500" />
+                <h3 className="text-xl font-semibold mb-2">Step 4</h3>
+                <p className="text-gray-600">Attend events and enjoy!</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-12">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-8">
+              Benefits & Features
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <FaTicketAlt className="mx-auto mb-4 text-4xl text-blue-500" />
+
+                <h3 className="text-xl font-semibold mb-2">Easy Booking</h3>
+                <p className="text-gray-600">
+                  Quickly find and book events with just a few clicks.
+                </p>
+              </div>
+              <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <FaLock className="mx-auto mb-4 text-4xl text-blue-500" />
+                <h3 className="text-xl font-semibold mb-2">Secure Payments</h3>
+                <p className="text-gray-600">
+                  Your transactions are safe with our secure payment gateway.
+                </p>
+              </div>
+              <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <FaStar className="mx-auto mb-4 text-4xl text-blue-500" />
+                <h3 className="text-xl font-semibold mb-2">
+                  Personalized Recommendations
+                </h3>
+                <p className="text-gray-600">
+                  Get event suggestions tailored to your interests.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

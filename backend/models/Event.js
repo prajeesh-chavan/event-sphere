@@ -1,12 +1,25 @@
+// eventSchema.js
+
 const mongoose = require("mongoose");
 
 const eventSchema = new mongoose.Schema({
-  eventName: String,
-  description: String,
-  date: String,
-  time: String,
-  location: String,
-  imageUrl: String, // Add this line
+  title: { type: String, required: true },
+  date: { type: Date, required: true },
+  time: { type: String, required: true }, // Ensure time is a required string
+  location: { type: String, required: true },
+  description: { type: String, required: true },
+  schedule: [String], // Array of strings for schedule
+  organizer: {
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    phone: { type: String, required: true },
+  },
+  eventOrganizerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users",
+    required: true,
+  },
 });
 
-module.exports = mongoose.model("Event", eventSchema);
+const Event = mongoose.model("Event", eventSchema);
+module.exports = Event;

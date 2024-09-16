@@ -15,14 +15,14 @@ export const Hero = () => {
     const timer = setTimeout(() => {
       // Start the animation after 3 seconds (or any other logic)
       lottieRef.current?.pause();
-    }, 2000); // Adjust the delay time (3000ms = 3 seconds)
+    }, 1500); // Adjust the delay time (3000ms = 3 seconds)
 
     // Optional: Clear timeout if component unmounts
     return () => clearTimeout(timer);
   }, []);
   return (
-    <section className="flex flex-col items-center justify-center sm:p-40 md:pt-52 bg-gradient-to-b from-sky-100/60 to-transparent">
-      <div className="flex items-center justify-center flex-col md:flex-row w-[320px] sm:w-auto">
+    <section className="flex flex-col h-[95vh] pt-12 items-center justify-center  bg-gradient-to-b from-sky-100/60 to-transparent">
+      <div className="flex items-center justify-between flex-col md:flex-row w-[320px] sm:w-auto">
         <div className="flex flex-col justify-center item-center md:items-start w-11/12 md:w-full lg:w-1/2 gap-6 text-center md:text-start">
           <WordPullUp
             words="Seamless Event Booking Starts Here"
@@ -51,7 +51,7 @@ export const Hero = () => {
         {/* <img src="/target-audience-51.svg" className="w-2/3 md:w-1/2" /> */}
         <Lottie
           animationData={heroImage}
-          className="w-2/3 md:w-1/2 md:-me-28"
+          className="w-2/3 md:w-2/3 md:-me-28"
           autoplay={false} // Disable autoplay
           lottieRef={lottieRef} // Assign the ref to Lottie
         />

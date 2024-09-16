@@ -50,86 +50,57 @@ export const reviews = [
   },
 ];
 
-export const events = [
+export const eventsData = [
   {
-    image:
-      "https://cdn.pixabay.com/photo/2016/11/29/06/17/audience-1867754_1280.jpg",
-    title: "Music Festival 2024",
-    date: "April 10, 2024",
-    location: "New York, NY",
-    description: "Join us for an unforgettable night of music and fun.",
-    category: "Music",
-  },
-  {
-    image:
-      "https://cdn.pixabay.com/photo/2013/02/20/01/04/meeting-83519_640.jpg",
+    id: 1,
     title: "Tech Conference 2024",
-    date: "May 15, 2024",
-    location: "San Francisco, CA",
-    description: "Explore the latest in technology and innovation.",
-    category: "Technology",
-  },
-  {
-    image:
-      "https://cdn.pixabay.com/photo/2018/01/28/17/48/gallery-3114279_640.jpg",
-    title: "Art Expo 2024",
-    date: "June 20, 2024",
-    location: "Los Angeles, CA",
-    description: "Discover beautiful art from around the world.",
-    category: "Art",
-  },
-  {
-    image:
-      "https://cdn.pixabay.com/photo/2016/11/29/06/17/audience-1867754_1280.jpg",
-    title: "Music Festival 2024",
-    date: "April 10, 2024",
+    date: "2024-10-01",
     location: "New York, NY",
-    description: "Join us for an unforgettable night of music and fun.",
-    category: "Music",
-  },
-  {
-    image:
-      "https://cdn.pixabay.com/photo/2013/02/20/01/04/meeting-83519_640.jpg",
-    title: "Tech Conference 2024",
-    date: "May 15, 2024",
-    location: "San Francisco, CA",
-    description: "Explore the latest in technology and innovation.",
+    description: "A conference for tech enthusiasts and professionals.",
     category: "Technology",
+    organizer: "Tech Corp",
+    contact: "info@techcorp.com",
   },
   {
-    image:
-      "https://cdn.pixabay.com/photo/2018/01/28/17/48/gallery-3114279_640.jpg",
-    title: "Art Expo 2024",
-    date: "June 20, 2024",
-    location: "Los Angeles, CA",
-    description: "Discover beautiful art from around the world.",
-    category: "Art",
-  },
-  {
-    image:
-      "https://cdn.pixabay.com/photo/2016/11/29/06/17/audience-1867754_1280.jpg",
-    title: "Music Festival 2024",
-    date: "April 10, 2024",
-    location: "New York, NY",
-    description: "Join us for an unforgettable night of music and fun.",
-    category: "Music",
-  },
-  {
-    image:
-      "https://cdn.pixabay.com/photo/2013/02/20/01/04/meeting-83519_640.jpg",
-    title: "Tech Conference 2024",
-    date: "May 15, 2024",
+    id: 2,
+    title: "Art Exhibition",
+    date: "2024-11-15",
     location: "San Francisco, CA",
-    description: "Explore the latest in technology and innovation.",
-    category: "Technology",
+    description: "An exhibition showcasing contemporary art.",
+    category: "Art",
+    organizer: "Art World",
+    contact: "contact@artworld.com",
   },
   {
-    image:
-      "https://cdn.pixabay.com/photo/2018/01/28/17/48/gallery-3114279_640.jpg",
-    title: "Art Expo 2024",
-    date: "June 20, 2024",
-    location: "Los Angeles, CA",
-    description: "Discover beautiful art from around the world.",
+    id: 3,
+    title: "Art Exhibition",
+    date: "2024-11-15",
+    location: "San Francisco, CA",
+    description: "An exhibition showcasing contemporary art.",
     category: "Art",
+    organizer: "Art World",
+    contact: "contact@artworld.com",
+  },
+  
+];
+
+export const tickets = [
+  {
+    id: 1,
+    eventTitle: "Event 1",
+    bookedAt: new Date(),
+    seatNumber: "A1",
+  },
+  {
+    id: 2,
+    eventTitle: "Event 2",
+    bookedAt: new Date(),
+    seatNumber: "A2",
+  },
+  {
+    id: 3,
+    eventTitle: "Event 3",
+    bookedAt: new Date(),
+    seatNumber: "A3",
   },
 ];
