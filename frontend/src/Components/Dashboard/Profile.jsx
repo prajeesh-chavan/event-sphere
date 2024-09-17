@@ -4,6 +4,8 @@ import ProfilePicture from "./ProfilePicture";
 import { useNavigate } from "react-router-dom";
 import { FiEdit2 } from "react-icons/fi";
 import toast from "react-hot-toast";
+import Lottie from "lottie-react";
+import loader from "../../assets/loader.json";
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
@@ -50,8 +52,10 @@ const UserProfile = () => {
 
   if (loading)
     return (
-      <div className="flex justify-center items-center h-full">
-        <div className="w-16 h-16 border-4 border-t-4 border-indigo-600 border-solid rounded-full animate-spin"></div>
+      <div className="h-full p-6 flex items-center justify-center">
+        <div className="text-gray-700 text-xl">
+          <Lottie animationData={loader} />
+        </div>
       </div>
     );
 

@@ -38,7 +38,7 @@ const ProfilePicture = ({ user }) => {
         <img
           src={
             preview ||
-            `http://localhost:5000/uploads/profile/${user.profilePicture}` ||
+            `http://localhost:5000/uploads/${user.profilePicture}` ||
             "/default-profile.png"
           } // Default image if no picture
           alt="Profile"
@@ -48,7 +48,7 @@ const ProfilePicture = ({ user }) => {
           htmlFor="file-upload"
           className="absolute bottom-1 right-2 bg-sky-500 text-white rounded-full p-2 shadow-md cursor-pointer hover:bg-sky-700 transition-colors"
         >
-          <FiEdit2 size={24}/>
+          <FiEdit2 size={24} />
 
           <input
             id="file-upload"

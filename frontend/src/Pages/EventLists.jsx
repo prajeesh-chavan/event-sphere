@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
-import SearchBar from "@/Components/SearchBar";
-import EventCard from "@/Components/EventCard";
-import { getEvents } from "@/services/eventService";
+import SearchBar from "../Components/SearchBar";
+import EventCard from "../Components/EventCard";
+import { getEvents } from "../services/eventService";
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce"; // Import lodash debounce
-// import Spinner from "@/Components/Spinner"; // Assuming you have a Spinner component
-import Skeleton from "@/Components/Skeleton"; // Assuming you have a Skeleton component
+import Skeleton from "../Components/Skeleton"; // Assuming you have a Skeleton component
+import { EventCardSkeleton } from "@/Components/skelatons";
 
 function EventLists() {
   const [events, setEvents] = useState([]);
@@ -49,13 +49,15 @@ function EventLists() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen pt-28 p-12 gap-12 bg-gradient-to-l from-sky-100/80 via-white to-sky-100/80">
       <SearchBar onSearch={searchEvents} />
-      
+
       {loading ? (
         // Show skeleton loader while fetching events
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-          {[1, 2, 3, 4, 5, 6].map((_, index) => (
-            <Skeleton key={index} className="w-full h-64" /> 
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array(3)
+            .fill()
+            .map((_, index) => (
+              <EventCardSkeleton key={index} />
+            ))}
         </div>
       ) : error ? (
         <p className="text-destructive">{error}</p>
@@ -75,7 +77,9 @@ function EventLists() {
           ))}
         </div>
       ) : (
-        <p className="text-destructive">No events found matching the search criteria.</p>
+        <p className="text-destructive">
+          No events found matching the search criteria.
+        </p>
       )}
     </div>
   );

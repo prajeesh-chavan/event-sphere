@@ -1,4 +1,4 @@
-import DashboardSidebar from "@/Components/Dashboard/DashboardSidebar";
+import DashboardSidebar from "../Components/Dashboard/DashboardSidebar";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
@@ -6,7 +6,7 @@ import { RiDashboardLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { IoTicketOutline } from "react-icons/io5";
 import { MdOutlineEventAvailable } from "react-icons/md";
-import { getUserProfile } from "@/services/userService";
+import { getUserProfile } from "../services/userService";
 
 function Dashboard() {
   const navLinks = [];
@@ -106,7 +106,7 @@ function Dashboard() {
             <div className="w-10 h-10 flex justify-center items-center">
               <img
                 className="w-10 h-10 rounded-full object-cover object-top"
-                src={`http://localhost:5000/uploads/profile/${user.profilePicture}`}
+                src={`http://localhost:5000/uploads/${user.profilePicture}`}
                 alt="User Profile Picture"
               />
             </div>

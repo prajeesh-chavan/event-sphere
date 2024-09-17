@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-
-import Ticket from "../TicketList";
-// import { tickets } from "@/data";
 import EventCard from "../EventCard";
-import { getEvents } from "@/services/eventService";
+import { getEvents } from "../../services/eventService";
 import { Link } from "react-router-dom";
+import { EventCardSkeleton } from "../skelatons";
 
 function Dashboard() {
   const CircularProgressBar = ({ progress }) => {
@@ -76,12 +74,7 @@ function Dashboard() {
         {loading ? (
           Array(3)
             .fill()
-            .map((_, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-sm">
-                <Skeleton height={200} />
-                <Skeleton count={3} />
-              </div>
-            ))
+            .map((_, index) => <EventCardSkeleton key={index} />)
         ) : events.length === 0 ? (
           <p className="text-gray-600">No events to display.</p>
         ) : (

@@ -135,7 +135,7 @@ const UpdateEventForm = () => {
         </h1>
         <button
           onClick={() => setEditMode(!editMode)}
-          className="bg-blue-500 h-12 text-white px-4 py-2 rounded"
+          className="bg-sky-500 h-12 text-white px-4 py-2 rounded hover:bg-sky-600"
         >
           {editMode ? "Cancel" : "Edit Event"}
         </button>
@@ -146,28 +146,32 @@ const UpdateEventForm = () => {
         {/* Event Image */}
         <div className="mb-4">
           <label className="block text-gray-700">Event Image</label>
-          {existingImage && !eventData.image && (
-            <div className="mb-2">
-              <img
-                src={`http://localhost:5000${existingImage}`}
-                alt="Event"
-                className="w-64 h-40 object-cover"
-              />
-            </div>
+          {existingImage &&
+            (eventData.image ? (
+              <div className="mb-2">
+                <img
+                  src={`http://localhost:5000${existingImage}`}
+                  alt="Event"
+                  className="w-64 h-40 object-cover"
+                />
+              </div>
+            ) : (
+              <p>No Image</p>
+            ))}
+          {editMode && (
+            <input
+              type="file"
+              name="image"
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded mt-2"
+            />
           )}
-          {editMode&&(<input
-            type="file"
-            name="image"
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-2"
-          />)}
           {eventData.image && (
             <div className="mt-2 text-sm text-green-600">
               Selected file: {eventData.image.name}
             </div>
           )}
         </div>
-
 
         {/* Event Title */}
         <div className="mb-4">

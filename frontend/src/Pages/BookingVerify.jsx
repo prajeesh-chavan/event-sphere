@@ -1,6 +1,6 @@
 //Booking Verify Page
 
-import { verifyBooking } from "@/services/bookingService";
+import { verifyBooking } from "../services/bookingService";
 import { set } from "date-fns";
 import Lottie from "lottie-react";
 import React, { useState, useEffect } from "react";

@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run start --prefix backend\" \"npm run start --prefix frontend\""
+    "start": "concurrently \"nodemon server.js --prefix backend\" \"npm run start --prefix frontend\""
   },
   "keywords": [],
   "author": "",

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getEventById } from "../services/eventService";
-import {BookingForm} from "@/Components/Booking/BookingForm";
+import { BookingForm } from "../Components/Booking/BookingForm";
 import { MdClose } from "react-icons/md";
 
 const EventDetails = () => {
@@ -97,7 +97,7 @@ const EventDetails = () => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed  inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 p-5 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="relative">
             <BookingForm eventId={event._id} setIsModalOpen={setIsModalOpen} />
             <MdClose

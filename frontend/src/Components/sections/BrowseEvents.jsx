@@ -4,7 +4,7 @@ import SearchBar from "../SearchBar";
 export const BrowseEvents = () => {
   return (
     <section
-      className="flex flex-col items-center pt-20 gap-6 h-[95vh]"
+      className="flex flex-col items-center pt-28 gap-6 h-[95vh]"
       id="search-event"
     >
       <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl  font-bold text-center ">

@@ -24,7 +24,7 @@ const AboutUs = () => {
             <h3 className="text-xl font-semibold">Prajeesh Chavan</h3>
             <p className="text-sm text-gray-600">Web Developer</p>
             <div className="flex justify-center space-x-4 mt-3">
-              <a href="#" className="text-blue-500">
+              <a href="#" className="text-sky-500">
                 <FaLinkedin size={20} />
               </a>
               <a href="#" className="text-blue-400">

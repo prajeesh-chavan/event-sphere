@@ -1,9 +1,8 @@
 import React from "react";
-import { Testimonials } from "@/Components/Testimonals";
 import { useInView } from "react-intersection-observer";
-import { Hero } from "@/Components/sections/Hero";
-import { BrowseEvents } from "@/Components/sections/BrowseEvents";
-import { FeaturedEvents } from "@/Components/sections/FeacturedEvents";
+import { Hero } from "../Components/sections/Hero";
+import { BrowseEvents } from "../Components/sections/BrowseEvents";
+import { FeaturedEvents } from "../Components/sections/FeacturedEvents";
 
 import {
   FaUserPlus,

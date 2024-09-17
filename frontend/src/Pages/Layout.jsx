@@ -1,5 +1,5 @@
-import Navbar from "@/Components/Navbar";
-import Footer from "@/Components/Footer";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Lottie from "lottie-react";

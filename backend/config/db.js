@@ -1,15 +1,9 @@
 // backend/config/db.js
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 
-dotenv.config();
-
-MONGO_URI =
-  "mongodb+srv://prajeeshchavan:23072004@event-sphere.vgb47.mongodb.net/?retryWrites=true&w=majority&appName=event-sphere";
-
-const connectDB = async () => {
+const connectDB = async (MONGODB_URI) => {
   try {
-    await mongoose.connect(MONGO_URI, {
+    await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

@@ -1,7 +1,7 @@
 // frontend/src/services/bookingService.js
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/bookings/";
+const API_URL = `${import.meta.env.VITE_API_URL}/bookings/`;
 
 // Helper to get Authorization headers with token
 const getAuthConfig = () => {
@@ -40,6 +40,6 @@ export const getEventBookings = async (eventId) => {
 
 export const verifyBooking = async (bookingId) => {
   const response = await axios.get(`${API_URL}verify/${bookingId}`);
-  
+
   return response.data;
 };

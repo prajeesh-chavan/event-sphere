@@ -22,10 +22,12 @@ import AboutUs from "./Pages/AboutUs";
 import EventLists from "./Pages/EventLists";
 import UserDashboard from "./Components/Dashboard/UserDashboard";
 import Dashboard from "./Pages/Dashboard";
-import BookingPage from "./Pages/BookingPage";
 import { Toaster } from "react-hot-toast";
 import UpdateEventForm from "./Components/Events/updateEvent";
 import BookingVerify from "./Pages/BookingVerify";
+import ContactUs from "./Pages/Contact-Us";
+import ForgotPassword from "./Components/Auth/ForgetPassword";
+import ResetPassword from "./Components/Auth/ResetPassword";
 
 function App() {
   return (
@@ -38,14 +40,16 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="event/:id" element={<EventDetails />} />
-            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="about-us" element={<AboutUs />} />
+            <Route path="contact-us" element={<ContactUs />} />
             <Route path="event-list" element={<EventLists />} />
           </Route>
           {/* <Route path="dashboard1" element={<Dashboard />} /> */}
           <Route path="login" element={<LogIn />} />
           <Route path="register" element={<Register />} />
-          <Route path="bookings/:eventId" element={<BookingPage />} />
           <Route path="verify/:id" element={<BookingVerify />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="reset-password/:token" element={<ResetPassword />} />
 
           {/* Admin Protected Routes */}
           <Route

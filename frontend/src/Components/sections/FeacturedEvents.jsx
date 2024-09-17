@@ -2,7 +2,7 @@ import { useInView } from "framer-motion";
 import EventCard from "../EventCard";
 import BlurFade from "../magicui/blur-fade";
 import { useEffect, useRef, useState } from "react";
-import { getEvents } from "@/services/eventService";
+import { getEvents } from "../../services/eventService";
 import { Link } from "react-router-dom";
 
 export const FeaturedEvents = () => {

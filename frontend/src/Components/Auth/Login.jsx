@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "@/services/authService";
+import { login } from "../../services/authService";
 import toast from "react-hot-toast";
 
 const LogIn = () => {
@@ -38,7 +38,7 @@ const LogIn = () => {
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
         <a
           href="/"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
@@ -108,7 +108,7 @@ const LogIn = () => {
                   </div>
                 </div>
                 <a
-                  href="#"
+                  href="/forgot-password"
                   className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Forgot password?

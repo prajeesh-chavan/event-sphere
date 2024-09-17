@@ -110,6 +110,15 @@ const CreateEvent = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
+          <label className="block text-gray-700">Event Image</label>
+          <input
+            type="file"
+            name="image"
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded mt-2"
+          />
+        </div>
+        <div className="mb-4">
           <label className="block text-gray-700">Event Title</label>
           <input
             type="text"
@@ -178,7 +187,7 @@ const CreateEvent = () => {
           <button
             type="button"
             onClick={addScheduleItem}
-            className="mt-2 bg-blue-500 text-white px-4 py-2 rounded"
+            className="mt-2 bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-600 transition duration-300"
           >
             Add Schedule Item
           </button>
@@ -216,15 +225,7 @@ const CreateEvent = () => {
             required
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Event Image</label>
-          <input
-            type="file"
-            name="image"
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-2"
-          />
-        </div>
+
         <button
           type="submit"
           className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition duration-300"

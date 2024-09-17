@@ -11,7 +11,9 @@ const userRoutes = require("./routes/userRoutes");
 const path = require("path");
 
 dotenv.config();
-connectDB();
+const MONGODB_URI = process.env.MONGODB_URI;
+
+connectDB(MONGODB_URI);
 
 const app = express();
 app.use(cors());

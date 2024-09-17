@@ -110,7 +110,7 @@ const Navbar = () => {
             <>
               <Link to={dashboardLink()} className="text-gray-600">
                 <img
-                  src={`http://localhost:5000/uploads/profile/${user.profilePicture}`}
+                  src={`http://localhost:5000/uploads/${user.profilePicture}`}
                   alt={`${userName} Avatar`}
                   className="w-12 h-12 rounded-full object-cover object-top"
                 />

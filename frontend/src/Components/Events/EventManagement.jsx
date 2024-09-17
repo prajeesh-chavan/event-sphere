@@ -1,10 +1,10 @@
-import { getEvents } from "@/services/eventService";
+import { getEvents } from "../../services/eventService";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EventCard from "../EventCard";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-
+import { EventCardSkeleton } from "../skelatons";
 
 const EventManagement = () => {
   const [events, setEvents] = useState([]);
@@ -43,7 +43,7 @@ const EventManagement = () => {
           {Array(3)
             .fill()
             .map((_, index) => (
-              <Skeleton key={index} height={400} />
+              <EventCardSkeleton key={index} />
             ))}
         </div>
       ) : (

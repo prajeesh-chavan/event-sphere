@@ -3,6 +3,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { getUserBookings } from "@/services/bookingService";
 import Barcode from "react-barcode";
 import QRCode from "react-qr-code";
+import Lottie from "lottie-react";
+import loader from "../../assets/loader.json";
 
 function TicketList() {
   const [tickets, setTickets] = useState([]);
@@ -36,7 +38,7 @@ function TicketList() {
   if (loading) {
     return (
       <div className="h-full p-6 flex items-center justify-center">
-        <div className="text-gray-700 text-xl">Loading your tickets...</div>
+        <div className="text-gray-700 text-xl"><Lottie animationData={loader} /></div>
       </div>
     );
   }
