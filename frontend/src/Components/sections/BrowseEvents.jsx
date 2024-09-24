@@ -4,10 +4,10 @@ import SearchBar from "../SearchBar";
 export const BrowseEvents = () => {
   return (
     <section
-      className="flex flex-col items-center pt-28 gap-6 h-[95vh]"
+      className="flex flex-col items-center p-6 pt-28 gap-6 h-[95vh]"
       id="search-event"
     >
-      <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl  font-bold text-center ">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl  font-bold text-center ">
         <BlurFade delay={0.25} inView>
           Engage Your Curiosity
         </BlurFade>

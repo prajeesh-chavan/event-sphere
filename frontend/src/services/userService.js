@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Base URL for your API
-const API_BASE_URL = `${import.meta.env.VITE_API_URL}`;
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 // Helper to get Authorization headers with token
 const getAuthConfig = () => {

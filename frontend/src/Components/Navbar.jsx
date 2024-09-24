@@ -67,7 +67,7 @@ const Navbar = () => {
         {/* Hamburger Icon for Mobile */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex absolute left-0 items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none"
+          className="inline-flex absolute left-0 items-center p-2 ml-3 text-sm text-black rounded-lg md:hidden  focus:outline-none"
           aria-controls="navbar-default"
           aria-expanded={isOpen}
         >
@@ -81,7 +81,7 @@ const Navbar = () => {
             isOpen ? "block absolute top-20" : "hidden"
           } md:flex items-center justify-center flex-grow`}
         >
-          <ul className="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg bg-blue-50/50 md:bg-transparent md:flex-row md:space-x-8 md:mt-0 md:border-0">
+          <ul className="flex flex-col gap-5 md:gap-0 p-4 mt-4 font-medium border border-gray-100 rounded-lg bg-white md:bg-transparent md:flex-row md:space-x-8 md:mt-0 md:border-0">
             {[
               { name: "Home", to: "/" },
               { name: "Browse Events", to: "/event-list" },

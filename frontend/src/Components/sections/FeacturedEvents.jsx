@@ -35,7 +35,7 @@ export const FeaturedEvents = () => {
           <Link to={`/event/${event._id}`}>
             <EventCard
               key={index}
-              // image={`http://localhost:5000${event.imageUrl}`}
+              image={`${import.meta.env.VITE_API_URL}${event.image}`}
               title={event.title}
               date={event.date}
               location={event.location}

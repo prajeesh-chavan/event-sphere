@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
 import toast from "react-hot-toast";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 const LogIn = () => {
   const [username, setUsername] = useState("");
@@ -34,6 +35,12 @@ const LogIn = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -77,16 +84,30 @@ const LogIn = () => {
                 >
                   Password
                 </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    id="password"
+                    placeholder="••••••••"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                  >
+                    {password &&
+                      (showPassword ? (
+                        <IoEyeOff size={24} />
+                      ) : (
+                        <IoEye size={24} />
+                      ))}
+                  </button>
+                </div>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
@@ -121,7 +142,7 @@ const LogIn = () => {
                 }`}
                 // disabled={loading}
               >
-                {loading ? "Loging in..." : "Log in"}
+                {loading ? "Logging in..." : "Log in"}
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}

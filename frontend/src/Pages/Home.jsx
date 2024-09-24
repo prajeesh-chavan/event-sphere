@@ -26,7 +26,7 @@ const Home = () => {
         <BrowseEvents />
         <FeaturedEvents />
         {/* <Testimonials /> */}
-        <section className="py-12" ref={ref}>
+        <section className="py-12">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-8">
               How It Works
@@ -36,28 +36,28 @@ const Home = () => {
                 inView ? "animate-fadeIn" : ""
               }`}
             >
-              <div className="text-center hover:scale-105 transform transition-transform">
-                <FaUserPlus className="mx-auto mb-4 text-4xl text-blue-500" />
+              <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <FaUserPlus className="mx-auto mb-4 text-4xl text-blue-500" />
                 <h3 className="text-xl font-semibold mb-2">Step 1</h3>
                 <p className="text-gray-600">
                   Sign up and create your profile.
                 </p>
               </div>
-              <div className="text-center hover:scale-105 transform transition-transform">
+              <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
                 <FaSearch className="mx-auto mb-4 text-4xl text-blue-500" />
                 <h3 className="text-xl font-semibold mb-2">Step 2</h3>
                 <p className="text-gray-600">
                   Browse and find events that interest you.
                 </p>
               </div>
-              <div className="text-center hover:scale-105 transform transition-transform">
+              <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
                 <FaTicketAlt className="mx-auto mb-4 text-4xl text-blue-500" />
                 <h3 className="text-xl font-semibold mb-2">Step 3</h3>
                 <p className="text-gray-600">
                   Register for events and get your tickets.
                 </p>
               </div>
-              <div className="text-center hover:scale-105 transform transition-transform">
+              <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
                 <FaSmile className="mx-auto mb-4 text-4xl text-blue-500" />
                 <h3 className="text-xl font-semibold mb-2">Step 4</h3>
                 <p className="text-gray-600">Attend events and enjoy!</p>

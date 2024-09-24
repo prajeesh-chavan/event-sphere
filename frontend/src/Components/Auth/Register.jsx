@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { register } from "../../services/authService";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -14,6 +15,12 @@ const Register = () => {
   const [contactNumber, setContactNumber] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const navigate = useNavigate();
 
@@ -119,16 +126,30 @@ const Register = () => {
                 >
                   Password
                 </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 transition-all duration-300"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    id="password"
+                    placeholder="••••••••"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 transition-all duration-300"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                  >
+                    {password &&
+                      (showPassword ? (
+                        <IoEyeOff size={24} />
+                      ) : (
+                        <IoEye size={24} />
+                      ))}
+                  </button>
+                </div>
               </div>
               <div>
                 <label
@@ -137,16 +158,30 @@ const Register = () => {
                 >
                   Confirm Password
                 </label>
-                <input
-                  type="password"
-                  name="confirm-password"
-                  id="confirm-password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 transition-all duration-300"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                />
+                <div className="relative">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirm-password"
+                    id="confirm-password"
+                    placeholder="••••••••"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 transition-all duration-300"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                  >
+                    {password &&
+                      (showConfirmPassword ? (
+                        <IoEyeOff size={24} />
+                      ) : (
+                        <IoEye size={24} />
+                      ))}
+                  </button>
+                </div>
               </div>
               {role === "organizer" && (
                 <>

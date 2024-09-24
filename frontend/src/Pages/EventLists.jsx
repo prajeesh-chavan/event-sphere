@@ -66,7 +66,7 @@ function EventLists() {
           {filteredEvents.map((event) => (
             <Link to={`/event/${event._id}`} key={event._id}>
               <EventCard
-                image={event.image}
+                image={`${import.meta.env.VITE_API_URL}${event.image}`}
                 title={event.title}
                 date={event.date}
                 location={event.location}

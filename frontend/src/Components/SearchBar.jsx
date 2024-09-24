@@ -17,7 +17,7 @@ function SearchBar({ onSearch }) {
   };
 
   return (
-    <div className="search-bar-container w-3/4 md:w-full max-w-4xl md:mx-auto shadow-md py-4 px-6 rounded-xl md:rounded-full border-2 border-sky-300 cursor-pointer">
+    <div className="search-bar-container w-full max-w-4xl md:mx-auto shadow-md py-4 px-6 rounded-xl md:rounded-full border-2 border-sky-300 cursor-pointer">
       <form
         className="search-bar-form flex flex-col md:flex-row space-y-4 sm:space-y-0 sm:space-x-4 items-center justify-center"
         onSubmit={handleSearch}
@@ -53,7 +53,7 @@ function SearchBar({ onSearch }) {
 
         <button
           type="submit"
-          className="w-auto flex gap-2 bg-sky-500 text-white text-center items-center py-3 px-3 rounded-full transform transition hover:scale-105 hover:bg-sky-500/80"
+          className="w-full md:w-auto flex justify-center gap-2 bg-sky-500 text-white text-center items-center py-3 px-3 rounded-full transform transition hover:scale-105 hover:bg-sky-500/80"
         >
           <IoSearch size={24} />
           <h1 className="text-lg  sm:hidden">Search</h1>

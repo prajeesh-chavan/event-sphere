@@ -83,7 +83,7 @@ function Dashboard() {
               <Link to={`/organizer/event-details/${event._id}`}>
                 <EventCard
                   key={index}
-                  image={`http://localhost:5000${event.image}`}
+                  image={`${import.meta.env.VITE_API_URL}${event.image}`}
                   title={event.title}
                   date={event.date}
                   location={event.location}

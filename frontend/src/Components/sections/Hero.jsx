@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 export const Hero = () => {
   return (
     <section className="flex flex-col h-[95vh] pt-12 items-center justify-center  bg-gradient-to-b from-sky-100/60 to-transparent">
-      <div className="flex items-center justify-between flex-col md:flex-row w-[320px] sm:w-auto">
+      <div className="flex items-center justify-between flex-col md:flex-row w-auto">
         <div className="flex flex-col justify-center item-center md:items-start w-11/12 md:w-full lg:w-1/2 gap-6 text-center md:text-start">
           <WordPullUp
             words="Seamless Event Booking Starts Here"
