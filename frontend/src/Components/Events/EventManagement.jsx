@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import EventCard from "../EventCard";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { EventCardSkeleton } from "../skelatons";
+import { EventCardSkeleton } from "../Skelatons";
 
 const EventManagement = () => {
   const [events, setEvents] = useState([]);
