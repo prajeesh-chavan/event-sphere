@@ -4,7 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import EventCard from "../EventCard";
 import { getEvents } from "../../services/eventService";
 import { Link } from "react-router-dom";
-import { EventCardSkeleton } from "../skelatons";
+import { EventCardSkeleton } from "../Skelatons";
 
 function Dashboard() {
   const CircularProgressBar = ({ progress }) => {
