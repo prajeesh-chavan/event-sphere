@@ -5,7 +5,7 @@ import { getEvents } from "../services/eventService";
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce"; // Import lodash debounce
 import Skeleton from "../Components/Skeleton"; // Assuming you have a Skeleton component
-import { EventCardSkeleton } from "@/Components/skelatons";
+import { EventCardSkeleton } from "@/Components/Skelatons";
 
 function EventLists() {
   const [events, setEvents] = useState([]);
