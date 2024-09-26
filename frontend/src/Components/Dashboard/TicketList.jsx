@@ -38,7 +38,9 @@ function TicketList() {
   if (loading) {
     return (
       <div className="h-full p-6 flex items-center justify-center">
-        <div className="text-gray-700 text-xl"><Lottie animationData={loader} /></div>
+        <div className="text-gray-700 text-xl">
+          <Lottie animationData={loader} />
+        </div>
       </div>
     );
   }
@@ -145,7 +147,7 @@ function TicketList() {
               <div className="ticket-qr text-center">
                 <QRCode
                   size={150}
-                  value={`http://localhost:5173/${selectedTicket._id}`}
+                  value={`http://localhost:5173/verify/${selectedTicket._id}`}
                   className="border-2 border-gray-200 p-2 rounded-md"
                 />
               </div>
