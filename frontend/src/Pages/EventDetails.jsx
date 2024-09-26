@@ -5,6 +5,7 @@ import { BookingForm } from "../Components/Booking/BookingForm";
 import { MdClose } from "react-icons/md";
 import { FiShare2 } from "react-icons/fi"; // Importing the share icon
 import toast from "react-hot-toast";
+import { RiShareForwardLine } from "react-icons/ri";
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -63,7 +64,7 @@ const EventDetails = () => {
       )}
 
       {/* Event Header */}
-      <header className="bg-gradient-to-r from-sky-500 to-sky-600 text-white p-8 rounded-lg mb-8 shadow-lg flex justify-between items-start">
+      <header className="relative bg-gradient-to-r from-sky-500 to-sky-600 text-white p-8 rounded-lg mb-8 shadow-lg flex justify-between items-start">
         <div>
           <h1 className="text-5xl font-extrabold drop-shadow-sm">
             {event.title}
@@ -76,11 +77,12 @@ const EventDetails = () => {
         </div>
         {/* Share Icon */}
         <button
-          className="bg-white text-sky-500 p-2 rounded-full hover:bg-sky-100 transition duration-300"
+          className="absolute right-2 top-2 text-white p-2 rounded-full hover:scale-105 transition duration-300"
           onClick={handleShare}
           title="Share Event"
         >
-          <FiShare2 size={24} />
+         
+          <RiShareForwardLine size={24} />
         </button>
       </header>
 
