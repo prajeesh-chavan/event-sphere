@@ -1,6 +1,6 @@
-// frontend/src/components/Booking/BookingSummary.js
-import React, { useEffect, useState } from 'react';
-import { getUserBookings, cancelBooking } from '../../services/bookingService';
+// frontend/src/Components/Booking/BookingSummary.js
+import React, { useEffect, useState } from "react";
+import { getUserBookings, cancelBooking } from "../../services/bookingService";
 
 const BookingSummary = () => {
   const [bookings, setBookings] = useState([]);
@@ -18,7 +18,7 @@ const BookingSummary = () => {
       await cancelBooking(bookingId);
       setBookings(bookings.filter((booking) => booking._id !== bookingId));
     } catch (err) {
-      console.error('Error canceling booking', err);
+      console.error("Error canceling booking", err);
     }
   };
 

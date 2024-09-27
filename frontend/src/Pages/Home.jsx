@@ -37,7 +37,7 @@ const Home = () => {
               }`}
             >
               <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <FaUserPlus className="mx-auto mb-4 text-4xl text-blue-500" />
+                <FaUserPlus className="mx-auto mb-4 text-4xl text-blue-500" />
                 <h3 className="text-xl font-semibold mb-2">Step 1</h3>
                 <p className="text-gray-600">
                   Sign up and create your profile.

@@ -13,11 +13,7 @@ function Dashboard() {
     // Your links here
   ];
 
-  return (
-    <>
-      
-    </>
-  );
+  return <></>;
 }
 
 export default Dashboard;

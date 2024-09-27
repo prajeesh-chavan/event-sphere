@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import Marquee from "@/components/magicui/marquee";
+import Marquee from "@/Components/magicui/marquee";
 import { reviews } from "@/data";
 
 const firstRow = reviews.slice(0, reviews.length / 2);

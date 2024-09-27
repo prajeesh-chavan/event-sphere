@@ -1,6 +1,6 @@
 "use client";
 
-import Particles from "@/components/magicui/particles";
+import Particles from "@/Components/magicui/particles";
 
 const ParticlesBg = ({ children }) => {
   return (

@@ -81,7 +81,6 @@ const EventDetails = () => {
           onClick={handleShare}
           title="Share Event"
         >
-         
           <RiShareForwardLine size={24} />
         </button>
       </header>
