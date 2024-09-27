@@ -147,7 +147,7 @@ function TicketList() {
               <div className="ticket-qr text-center">
                 <QRCode
                   size={150}
-                  value={`https://event-sphere-prajeesh-chavans-projects.vercel.app/verify/${selectedTicket._id}`}
+                  value={`https://event-sphere-seven.vercel.app/verify/${selectedTicket._id}`}
                   className="border-2 border-gray-200 p-2 rounded-md"
                 />
               </div>
